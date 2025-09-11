@@ -8,12 +8,7 @@ public class SidescrollerMovement : MonoBehaviour
 
     public float speed = 5.0f;
     public float height = 5.0f;
-    public bool isGrounded = false;
-    public float groundDistance = 0.1f;
-    public LayerMask groundLayer;
 
-    public Color lineColor = Color.red;
-    public float lineLength = 5f;
 
     // Update is called once per frame
     private void Update()
@@ -30,30 +25,8 @@ public class SidescrollerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            if (GroundCheck() == true)
-            {
-                transform.Translate(Vector2.up * height * Time.deltaTime);
-            }
-            else
-            {
-                print(GroundCheck());
-            }
+             transform.Translate(Vector2.up * height * Time.deltaTime);
         }
-    }
-
-    public bool GroundCheck()
-    {
-        return Physics.BoxCast(transform.position + Vector3.down, Vector3.one, Vector3.zero, Quaternion.identity, groundLayer);
-    }
-
-    public void OnDrawGizmos()
-    {
-        Gizmos.color = lineColor;
-
-        Vector3 start = transform.position;
-        Vector3 end = start + transform.forward * lineLength;
-
-        Gizmos.DrawLine(start, end);
     }
 }
 
